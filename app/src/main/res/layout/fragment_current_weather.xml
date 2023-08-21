@@ -1,6 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.current_weather_screen.CurrentWeatherFragment"/>
+    android:background="@drawable/background_gradient"
+    tools:context=".presentation.current_weather_screen.CurrentWeatherFragment">
+
+
+    <Button
+        style="@style/Widget.Material3.Button.TextButton"
+        android:textColor="@color/white"
+        android:minHeight="0dp"
+        android:id="@+id/cityName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Moscow"
+        android:drawableEnd="@drawable/baseline_call_made_24"
+        android:paddingHorizontal="20dp"/>
+
+    <TextView
+        style="@style/TextAppearance.Material3.TitleLarge"
+        android:id="@+id/greetingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cityName"
+        tools:text="Good Morning"
+        android:paddingHorizontal="20dp"/>
+
+    <ImageView
+        android:id="@+id/weatherIcon"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/weather_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/greetingText" />
+
+    <TextView
+        android:id="@+id/tempText"
+        style="@style/TextAppearance.Material3.TitleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textSize="70sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weatherIcon"
+        tools:text="21°C" />
+
+    <TextView
+        style="@style/TextAppearance.Material3.TitleLarge"
+        android:id="@+id/weatherTypeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tempText"
+        tools:text="THUNDERSTORM" />
+
+    <TextView
+        style="@style/TextAppearance.Material3.TitleMedium"
+        android:id="@+id/dateTimeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weatherTypeText"
+        tools:text="Friday 16 · 09:41" />
+
+    <Button
+        style="@style/Widget.Material3.Button.TextButton"
+        android:id="@+id/forecastButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateTimeText"
+        tools:text="Next days" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="forecastButton" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/barrier">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="8dp">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start">
+
+                <TextView
+                    android:id="@+id/sunriseText"
+                    style="@style/TextAppearance.Material3.TitleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
+                    app:layout_constraintStart_toEndOf="@+id/sunriseIcon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Sunrise" />
+
+                <TextView
+                    style="@style/TextAppearance.Material3.TitleMedium"
+                    android:id="@+id/sunriseTimeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/sunriseText"
+                    app:layout_constraintTop_toBottomOf="@+id/sunriseText"
+                    tools:text="5:34"/>
+
+                <ImageView
+                    android:id="@+id/sunriseIcon"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/sunrise_icon"
+                    app:layout_constraintBottom_toBottomOf="@+id/sunriseTimeText"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/sunriseText" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end">
+
+                <TextView
+                    android:id="@+id/sunsetText"
+                    style="@style/TextAppearance.Material3.TitleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
+                    app:layout_constraintStart_toEndOf="@+id/sunsetIcon"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Sunset" />
+
+                <TextView
+                    style="@style/TextAppearance.Material3.TitleMedium"
+                    android:id="@+id/sunsetTimeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/sunsetText"
+                    app:layout_constraintTop_toBottomOf="@+id/sunsetText"
+                    tools:text="21:13"/>
+
+                <ImageView
+                    android:id="@+id/sunsetIcon"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/sunset_icon"
+                    app:layout_constraintBottom_toBottomOf="@+id/sunsetTimeText"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/sunsetText" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:layout_gravity="bottom" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
