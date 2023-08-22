@@ -7,5 +7,5 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class LocalNames(
     @Json(name = "ru")
-    val ru: String,
+    val ru: String?,
 )
