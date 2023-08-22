@@ -1,4 +1,4 @@
-package com.gramzin.weather.data.api.model
+package com.gramzin.weather.data.api.weather.model
 
 
 import com.squareup.moshi.Json

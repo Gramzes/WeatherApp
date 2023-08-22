@@ -1,6 +1,6 @@
 package com.gramzin.weather.data.repository
 
-import com.gramzin.weather.data.api.service.WeatherService
+import com.gramzin.weather.data.api.weather.service.WeatherService
 import com.gramzin.weather.data.mapper.WeatherMapper
 import com.gramzin.weather.domain.model.DailyWeather
 import com.gramzin.weather.domain.model.Weather

@@ -1,14 +1,10 @@
 package com.gramzin.weather.data.mapper
 
-import com.gramzin.weather.data.api.model.WeatherItem
+import com.gramzin.weather.data.api.weather.model.WeatherItem
 import com.gramzin.weather.domain.WeatherType
 import com.gramzin.weather.domain.model.DailyWeather
 import com.gramzin.weather.domain.model.Weather
-import java.text.SimpleDateFormat
-import java.time.Instant
-import java.time.LocalDate
 import java.util.Calendar
-import java.util.Date
 
 class WeatherMapper {
 
