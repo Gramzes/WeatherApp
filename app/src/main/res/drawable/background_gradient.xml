@@ -14,12 +14,23 @@
     <item>
         <shape android:shape="rectangle">
             <gradient
-                android:centerX="0.5"
-                android:centerY="0.0"
+                android:centerX="0.55"
+                android:centerY="-0.2"
+                android:centerColor="#8d757f"
+                android:endColor="@android:color/transparent"
+                android:type="radial"
+                android:gradientRadius="150%p"/>
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:centerX="0.55"
+                android:centerY="-0.2"
                 android:startColor="#e19227"
                 android:endColor="@android:color/transparent"
                 android:type="radial"
-                android:gradientRadius="100%p"/>
+                android:gradientRadius="150%p"/>
         </shape>
     </item>
 </layer-list>
