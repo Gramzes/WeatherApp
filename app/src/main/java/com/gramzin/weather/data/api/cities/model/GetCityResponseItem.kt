@@ -17,5 +17,5 @@ data class GetCityResponseItem(
     @Json(name = "name")
     val name: String,
     @Json(name = "state")
-    val state: String
+    val state: String?
 )
