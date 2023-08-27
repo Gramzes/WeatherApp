@@ -13,7 +13,7 @@ class CityRepositoryImpl(
 
     override fun getCurrentCityName(latitude: Double, longitude: Double): Single<City> {
         return cityService.getCityByCoord(latitude, longitude).map {
-            mapper.mapCityResponseToDomain(it)[0]
+            mapper.mapCityResponseToDomain(it.first())
         }
     }
 
