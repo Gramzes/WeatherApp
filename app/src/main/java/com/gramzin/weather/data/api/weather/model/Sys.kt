@@ -7,9 +7,9 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class Sys(
     @Json(name = "sunrise")
-    val sunrise: Long,
+    val sunrise: Long?,
     @Json(name = "sunset")
-    val sunset: Long,
-    @Json(name = "type")
-    val type: Int
+    val sunset: Long?,
+    @Json(name = "pod")
+    val partOfDayCode: String?
 )

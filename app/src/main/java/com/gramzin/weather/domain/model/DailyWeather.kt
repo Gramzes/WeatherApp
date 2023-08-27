@@ -6,6 +6,4 @@ data class DailyWeather(
     val weatherType: WeatherType,
     val minTemp: Int,
     val maxTemp: Int,
-    val sunriseTime: Long,
-    val sunsetTime: Long
 )

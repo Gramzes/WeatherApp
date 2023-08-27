@@ -8,13 +8,13 @@ import retrofit2.http.Query
 
 interface WeatherService {
 
-    @GET("api.openweathermap.org/data/2.5/weather?units=metric&appid={API key}")
+    @GET("data/2.5/weather?units=metric&appid=3a59407b2c30e2891e8f86ce591bde6f")
     fun getCurrentWeather(
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double
     ): Single<WeatherItem>
 
-    @GET("api.openweathermap.org/data/2.5/forecast?units=metric&appid={API key}")
+    @GET("data/2.5/forecast?units=metric&appid=3a59407b2c30e2891e8f86ce591bde6f")
     fun getForecast(
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double

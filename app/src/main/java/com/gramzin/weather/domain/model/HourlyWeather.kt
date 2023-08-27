@@ -3,7 +3,7 @@ package com.gramzin.weather.domain.model
 import com.gramzin.weather.domain.PartOfDay
 import com.gramzin.weather.domain.WeatherType
 
-data class Weather(
+class HourlyWeather(
     val time: Long,
     val weatherType: WeatherType,
     val temp: Int,
@@ -11,6 +11,5 @@ data class Weather(
     val windSpeed: Int,
     val cloudiness: Int,
     val humidity: Int,
-    val sunriseTime: Long,
-    val sunsetTime: Long
+    val partOfDay: PartOfDay
 )

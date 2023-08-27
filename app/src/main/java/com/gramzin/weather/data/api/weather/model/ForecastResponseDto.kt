@@ -8,4 +8,6 @@ import com.squareup.moshi.JsonClass
 data class ForecastResponseDto(
     @Json(name = "list")
     val list: List<WeatherItem>,
+    @Json(name = "city")
+    val city: City
 )
