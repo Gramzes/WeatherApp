@@ -1,5 +1,30 @@
 <resources>
     <string name="app_name">Weather</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="clear_sky">Clear sky</string>
+    <string name="few_clouds">Few clouds</string>
+    <string name="scattered_clouds">Scattered clouds</string>
+    <string name="broken_clouds">Broken clouds</string>
+    <string name="shower_rain">Shower rain</string>
+    <string name="rain">Rain</string>
+    <string name="thunderstorm">Thunderstorm</string>
+    <string name="snow">Snow</string>
+    <string name="mist">Mist</string>
+    <string name="good_night_greeting">Good night</string>
+    <string name="good_morning_greeting">Good morning</string>
+    <string name="good_afternoon_greeting">Good afternoon</string>
+    <string name="good_evening_greeting">Good evening</string>
+    <string name="sunset_title">Sunset</string>
+    <string name="next_hours_title">Next hours</string>
+    <string name="cloudiness_title">Cloudiness</string>
+    <string name="humidity_title">Humidity</string>
+    <string name="sunrise_title">Sunrise</string>
+    <string name="next_days_button_title">Next days</string>
+    <string name="find_city_button_title">Find city</string>
+    <string name="unknown_temp">--°C</string>
+    <string name="unknown_time_text">--:--</string>
+    <string name="unknown_percent_text">--%</string>
+    <string name="permission_is_required_title">Permission is required!</string>
+    <string name="permission_required_message">Grant permission to determine your location so that the app can identify your city and display the weather forecast.</string>
+    <string name="permission_diaolog_ok_button">Оk</string>
 </resources>
