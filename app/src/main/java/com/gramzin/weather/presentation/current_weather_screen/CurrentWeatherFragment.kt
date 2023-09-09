@@ -76,6 +76,7 @@ class CurrentWeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initView()
         viewModel.state.observe(viewLifecycleOwner){
             when (it){
                 CurrentWeatherScreenState.Initial -> {
