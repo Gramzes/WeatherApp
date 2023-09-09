@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.CornerPathEffect
+import android.graphics.LinearGradient
 import android.graphics.Paint
 import android.graphics.Path
 import android.text.TextPaint
@@ -34,6 +35,7 @@ class ForecastView @JvmOverloads constructor(
 
     private val periodSize = resources.getDimension(R.dimen.period_size)
     private val chartHeight = resources.getDimension(R.dimen.chart_height)
+    private val tempOffset = resources.getDimension(R.dimen.temp_offset)
     private val iconTopMargin = resources.getDimension(R.dimen.icon_top_margin)
     private val iconSize = resources.getDimension(R.dimen.icon_size)
     private val tempTopMargin = resources.getDimension(R.dimen.temp_top_margin)
@@ -45,8 +47,8 @@ class ForecastView @JvmOverloads constructor(
     private val contentWidth
         get() = (forecast.size - 1).coerceAtLeast(0) * periodSize + horizontalOffset * 2
 
-    private val contentHeight = chartHeight + iconTopMargin + iconSize + tempTopMargin +
-            tempTextHeight + timeTopMargin + timeTextSize
+    private val contentHeight = chartHeight + tempTextHeight + tempOffset + iconTopMargin +
+            iconSize + tempTopMargin + timeTopMargin + timeTextSize
 
     private val path = Path()
     private var transformation = Transformations()
@@ -71,7 +73,6 @@ class ForecastView @JvmOverloads constructor(
         textSize = timeTextSize
         color = Color.WHITE
     }
-
     private fun Paint.getTextBaselineByCenter(center: Float) = center - (descent() + ascent()) / 2
 
     private val scroller = Scroller(context, null, true)
@@ -160,10 +161,6 @@ class ForecastView @JvmOverloads constructor(
         drawWeatherItems()
     }
 
-    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        super.onSizeChanged(w, h, oldw, oldh)
-    }
-
     private fun Canvas.drawWeatherItems(){
         weatherUiItems.forEach{ weather ->
             weather.iconBitmap?.let {
@@ -201,27 +198,17 @@ class ForecastView @JvmOverloads constructor(
             forecast.forEachIndexed { index, weather ->
                 val y = ((maxTemp - weather.temp) / (maxTemp - minTemp).toFloat()) * chartHeight
                 if (index == 0) {
-                    path.moveTo(0 + translation, y)
+                    path.moveTo(0 + translation, y + tempTextHeight + tempOffset)
                 }
-                path.lineTo(index * periodSize + horizontalOffset + translation, y)
+                weatherUiItems[index].setTempTop(y)
+                path.lineTo(index * periodSize + horizontalOffset + translation, y + tempTextHeight + tempOffset)
             }
             val y = ((maxTemp - forecast.last().temp) / (maxTemp - minTemp).toFloat()) * chartHeight
-            path.lineTo(forecast.lastIndex * periodSize + 2 * horizontalOffset + translation, y)
+            path.lineTo(forecast.lastIndex * periodSize + 2 * horizontalOffset + translation, y + tempTextHeight + tempOffset)
         }
     }
-
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        gestureDetector.onTouchEvent(event)
-        return when(event?.action){
-            MotionEvent.ACTION_DOWN ->{
-                true
-            }
-            MotionEvent.ACTION_MOVE -> {
-
-                true
-            }
-            else -> false
-        }
+        return gestureDetector.onTouchEvent(event)
     }
 
     private fun addTranslation(offset: Float){
@@ -256,7 +243,6 @@ class ForecastView @JvmOverloads constructor(
             private set
         var tempBaseline = 0f
             private set
-
         var timeLeftX = 0f
             private set
         var timeBaseline = 0f
@@ -279,21 +265,22 @@ class ForecastView @JvmOverloads constructor(
 
             val centerX = itemIndex * periodSize + horizontalOffset
             iconLeftX = centerX - iconSize / 2
-            iconTopY = chartHeight + iconTopMargin
+            iconTopY = chartHeight + tempTextHeight + tempOffset + iconTopMargin
 
             tempLeftX = centerX - tempPaint.measureText(tempText) / 2
-            val tempTopY = iconTopY + iconSize + tempTopMargin
-            tempBaseline = tempPaint
-                .getTextBaselineByCenter(tempTopY + tempTextHeight / 2f)
 
             timeLeftX = centerX - timePaint.measureText(timeText) / 2
-            val timeTopY = tempTopY + tempTextHeight + timeTopMargin
+            val timeTopY = iconTopY + iconSize + timeTopMargin
             timeBaseline = tempPaint
                 .getTextBaselineByCenter(timeTopY + timeTextSize / 2f)
         }
+
+        fun setTempTop(y: Float){
+            tempBaseline = tempPaint.getTextBaselineByCenter(y + tempTextHeight / 2f)
+        }
     }
 
-    inner class Transformations(){
+    private inner class Transformations(){
         var translation = 0f
             private set
 
