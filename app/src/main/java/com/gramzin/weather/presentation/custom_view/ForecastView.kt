@@ -10,6 +10,8 @@ import android.graphics.CornerPathEffect
 import android.graphics.LinearGradient
 import android.graphics.Paint
 import android.graphics.Path
+import android.os.Parcel
+import android.os.Parcelable
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.util.Log
@@ -224,6 +226,47 @@ class ForecastView @JvmOverloads constructor(
         invalidate()
     }
 
+    override fun onSaveInstanceState(): Parcelable {
+        return SavedState(super.onSaveInstanceState()).also(transformation::onSaveInstanceState)
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        if (state is SavedState) {
+            super.onRestoreInstanceState(state.superState)
+            transformation.onRestoreInstanceState(state)
+            setTranslation(transformation.translation)
+        } else {
+            super.onRestoreInstanceState(state)
+        }
+    }
+
+    private class SavedState : BaseSavedState {
+        var translationX: Float = 0f
+
+        // Коснтруктор для сохранения стейта
+        constructor(superState: Parcelable?) : super(superState)
+
+        // Коснтруктор для восстановления стейта
+        constructor(source: Parcel?) : super(source) {
+            source?.apply {
+                translationX = readFloat()
+            }
+        }
+
+        override fun writeToParcel(out: Parcel, flags: Int) {
+            super.writeToParcel(out, flags)
+            out.writeFloat(translationX)
+        }
+
+        companion object {
+            @JvmField
+            val CREATOR: Parcelable.Creator<SavedState> = object : Parcelable.Creator<SavedState> {
+                override fun createFromParcel(source: Parcel): SavedState = SavedState(source)
+                override fun newArray(size: Int): Array<SavedState?> = arrayOfNulls(size)
+            }
+        }
+    }
+
     private inner class WeatherUiItem(
         private val itemIndex: Int) {
 
@@ -290,6 +333,14 @@ class ForecastView @JvmOverloads constructor(
 
         fun addTranslation(offset: Float){
             translation = (translation + offset).coerceIn(width-contentWidth, 0f)
+        }
+
+        fun onSaveInstanceState(state: SavedState){
+            state.translationX = translation
+        }
+
+        fun onRestoreInstanceState(state: SavedState){
+            translation = state.translationX
         }
     }
 
