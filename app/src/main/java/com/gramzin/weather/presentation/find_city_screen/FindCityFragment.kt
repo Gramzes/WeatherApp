@@ -20,4 +20,7 @@ class FindCityFragment : Fragment() {
         return binding.root
     }
 
+    companion object{
+        fun newInstance() = FindCityFragment()
+    }
 }
