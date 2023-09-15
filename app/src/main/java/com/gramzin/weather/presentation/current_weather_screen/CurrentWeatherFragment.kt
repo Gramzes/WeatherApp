@@ -76,6 +76,7 @@ class CurrentWeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initView()
         viewModel.state.observe(viewLifecycleOwner){
             when (it){
                 CurrentWeatherScreenState.Initial -> {
@@ -155,7 +156,7 @@ class CurrentWeatherFragment : Fragment() {
         humidityValueText.text = "${state.currentWeather.humidity}%"
         cloudinessValueText.text = "${state.currentWeather.cloudiness}%"
 
-        binding.forecastRC.adapter = HourlyForecastAdapter(state.forecast)
+        binding.forecastView.setForecast(state.forecast)
     }
 
     private fun getLocation(){
